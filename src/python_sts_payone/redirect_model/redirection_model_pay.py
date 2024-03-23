@@ -7,7 +7,7 @@ from typing import Tuple
 SR_URL: str = 'https://smartroute-test.payone.io/SmartRoutePaymentWeb/SRPayMsgHandler'
 REDIRECT_MESSAGE_ID: str = '1'
 
-def redirect_model_pay(merchant_id: str, auth_token: str, transaction_id: str, amount: Decimal, currency_iso_code: str, response_back_url: str) -> Tuple[str, int]:
+def redirect_model_pay(merchant_id: str, auth_token: str, transaction_id: str, amount: int, currency_iso_code: str, response_back_url: str) -> Tuple[str, int]:
     params: dict = {
         'MessageID': REDIRECT_MESSAGE_ID,
         'TransactionID': transaction_id,
