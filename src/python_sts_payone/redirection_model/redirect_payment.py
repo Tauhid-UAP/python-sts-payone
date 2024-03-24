@@ -1,16 +1,14 @@
 from requests.models import Response
 from typing import Tuple
 from ..base.request_handler import SmartRouteRequestHandler
+from .utils import REDIRECT_MESSAGE_ID, SR_URL_LIVE, SR_URL_TEST
 
-SR_URL_TEST: str = 'https://smartroute-test.payone.io/SmartRoutePaymentWeb/SRPayMsgHandler'
-SR_URL_LIVE: str = 'https://smartroute-test.payone.io/SmartRoutePaymentWeb/SRPayMsgHandler'
-REDIRECT_MESSAGE_ID: str = '1'
 
-def redirect_model_pay(merchant_id: str, auth_token: str, transaction_id: str, amount: int, currency_iso_code: str,
+def redirect_pay(merchant_id: str, auth_token: str, transaction_id: str, amount: int, currency_iso_code: str,
                        response_back_url: str, generate_token: bool=False, payment_method_token: str=None,
-                       payment_description: str=None, live_mode: bool=True, version: float=None) -> Tuple[str, int]:
+                       payment_description: str=None, live_mode: bool=True, version: float=None, message_id: str=REDIRECT_MESSAGE_ID) -> Tuple[str, int]:
     params: dict = {
-        'MessageID': REDIRECT_MESSAGE_ID,
+        'MessageID': message_id,
         'TransactionID': transaction_id,
         'MerchantID': merchant_id,
         'Amount': str(amount),

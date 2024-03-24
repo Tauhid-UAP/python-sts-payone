@@ -26,3 +26,11 @@ class SecureHashGenerator:
     
 def get_secure_hash(auth_token: str, params: dict) -> str:
     return SecureHashGenerator(auth_token, params).generate_secure_hash()
+
+def is_secure_hash_valid_for_parameters(secure_hash: str, auth_token: str, params: dict) -> bool:
+    generated_secure_hash: str = get_secure_hash(auth_token, params)
+    return generated_secure_hash == secure_hash
+
+def is_secure_hash_valid_for_response_payload(auth_token: str, params: dict) -> bool:
+    secure_hash: str = params.pop('Response.SecureHash')
+    return is_secure_hash_valid_for_parameters(secure_hash, auth_token, params)
