@@ -8,7 +8,7 @@ REDIRECT_MESSAGE_ID: str = '1'
 
 def redirect_model_pay(merchant_id: str, auth_token: str, transaction_id: str, amount: int, currency_iso_code: str,
                        response_back_url: str, generate_token: bool=False, payment_method_token: str=None,
-                       payment_description: str=None, live_mode: bool=True) -> Tuple[str, int]:
+                       payment_description: str=None, live_mode: bool=True, version: float=None) -> Tuple[str, int]:
     params: dict = {
         'MessageID': REDIRECT_MESSAGE_ID,
         'TransactionID': transaction_id,
@@ -24,6 +24,9 @@ def redirect_model_pay(merchant_id: str, auth_token: str, transaction_id: str, a
 
     if payment_description is not None:
         params['PaymentDescription'] = payment_description
+
+    if version is not None:
+        params['Version'] = str(version)
     
     sr_url: str = SR_URL_LIVE if live_mode else SR_URL_TEST
     res: Response = SmartRouteRequestHandler(sr_url, auth_token, params).send_request()
