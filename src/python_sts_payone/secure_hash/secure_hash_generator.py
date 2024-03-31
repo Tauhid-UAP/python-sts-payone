@@ -7,13 +7,17 @@ class SecureHashGenerator:
         self.auth_token: str = auth_token
 
         """The params need to be ordered in alphabetical order"""
-        self.params: OrderedDict = OrderedDict(sorted(params.items()))
+        self.params: OrderedDict = OrderedDict(sorted(params.copy().items()))
         print('PARAMS: {}'.format(self.params))
 
     def make_secure_hash_input_string(self) -> str:
         joined_param_values: str = ''
-        for value in self.params.values():
-            joined_param_values += str(value).replace(' ', '+')
+        for key, value in self.params.items():
+            value_to_concat: str = str(value)
+            if key == 'PaymentDescription':
+                value_to_concat = value_to_concat.replace(' ', '+')
+            
+            joined_param_values += value_to_concat
 
         print('JOINED PARAMS: {}'.format(joined_param_values))
 
