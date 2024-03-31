@@ -14,10 +14,12 @@ class SecureHashGenerator:
         joined_param_values: str = ''
         for key, value in self.params.items():
             value_to_concat: str = str(value)
-            if key == 'PaymentDescription':
-                value_to_concat = value_to_concat.replace(' ', '+')
+            if key in ('CardHolderName', 'Response.CardHolderName', ):
+                joined_param_values += value_to_concat
+                continue
             
-            joined_param_values += value_to_concat
+            joined_param_values += value_to_concat.replace(' ', '+')
+            
 
         print('JOINED PARAMS: {}'.format(joined_param_values))
 
