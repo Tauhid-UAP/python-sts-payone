@@ -1,7 +1,7 @@
 from requests.models import Response
 from typing import Tuple, List
 from ..base.request_handler import SmartRouteRequestHandler
-from .utils import REDIRECT_MESSAGE_ID, SR_URL_LIVE, SR_URL_TEST
+from ..base.utils import REDIRECT_MESSAGE_ID, SR_URL_LIVE, SR_URL_TEST
 
 
 def redirect_pay(merchant_id: str, auth_token: str, transaction_id: str, amount: int, currency_iso_code: str,
