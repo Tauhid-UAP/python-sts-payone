@@ -20,7 +20,7 @@ class SecureHashGenerator:
                 continue
 
             value_to_concat: str = str(value)
-            if key in ('CardHolderName', 'Response.CardHolderName', ):
+            if key in ('CardHolderName', 'Response.CardHolderName', 'PaymentMethod', 'Response.PaymentMethod'):
                 joined_param_values += value_to_concat
                 continue
             
